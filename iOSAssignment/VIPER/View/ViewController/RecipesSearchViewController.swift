@@ -159,6 +159,7 @@ extension RecipesSearchViewController : UITextFieldDelegate, UIPickerViewDelegat
        }
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         self.showActivityIndicator()
+        self.searchTextFeild.text = suggestionKeyWords[row]
         self.presenter?.updateView(keyWord: suggestionKeyWords[row])
         self.dataPicker.isHidden = true
         searchTextFeild.resignFirstResponder()
@@ -173,11 +174,19 @@ extension RecipesSearchViewController : UITextFieldDelegate, UIPickerViewDelegat
         }else{
             self.showActivityIndicator()
             scrollActivate = false
+            var texToSend = ""
             if suggestionKeyWords.count < 10{
-                suggestionKeyWords.append(self.searchTextFeild.text ?? "")
+                
+                
+                if let text = textField.text, let lastChar = text.last, lastChar == " " {
+                    texToSend = String(text.dropLast())
+                 
+                }
+                
+                suggestionKeyWords.append(texToSend)
             }
             
-            self.presenter?.updateView(keyWord: self.searchTextFeild.text ?? "")
+            self.presenter?.updateView(keyWord:texToSend)
             self.dataPicker.isHidden = true
             searchTextFeild.resignFirstResponder()
             return true
