@@ -131,9 +131,7 @@ extension RecipesSearchViewController : UITableViewDelegate, UITableViewDataSour
 }
 // MARK: Pagination
 extension RecipesSearchViewController: UIScrollViewDelegate{
-    
-    
-    
+
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if (scrollView.contentOffset.y + scrollView.frame.size.height) > scrollView.contentSize.height {
             if !scrollActivate {
@@ -159,18 +157,26 @@ extension RecipesSearchViewController : UITextFieldDelegate, UIPickerViewDelegat
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
            return suggestionKeyWords[row]
        }
-
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        self.showActivityIndicator()
+        self.presenter?.updateView(keyWord: suggestionKeyWords[row])
+        self.dataPicker.isHidden = true
+        searchTextFeild.resignFirstResponder()
+    }
  
        
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        print("textFieldShouldReturn")
-        if !validateField(enteredString: textField.text ?? "") {
+        if !validateField(enteredString: textField.text ?? "")   ||  textField.text.isNullOrWhitespace{
             self.showError(msg: "Please enter valid recipe")
             self.searchTextFeild.text  = ""
             return false
         }else{
-          scrollActivate = false
-            suggestionKeyWords.append(self.searchTextFeild.text ?? "")
+            self.showActivityIndicator()
+            scrollActivate = false
+            if suggestionKeyWords.count < 10{
+                suggestionKeyWords.append(self.searchTextFeild.text ?? "")
+            }
+            
             self.presenter?.updateView(keyWord: self.searchTextFeild.text ?? "")
             self.dataPicker.isHidden = true
             searchTextFeild.resignFirstResponder()
@@ -180,13 +186,9 @@ extension RecipesSearchViewController : UITextFieldDelegate, UIPickerViewDelegat
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-
         if textField == self.searchTextFeild  && suggestionKeyWords.count > 0{
-                self.dataPicker.isHidden = false
-                //if you don't want the users to se the keyboard type:
-
+            self.dataPicker.isHidden = false
             self.dataPicker.reloadAllComponents()
-//                textField.endEditing(true)
             }
         }
     //MARK:- ScrollView Delegate
@@ -208,10 +210,7 @@ extension RecipesSearchViewController: RecipesListPresenterToViewProtocol {
                 for i in a {
                     recipesToView?.hits?.append(i)
                 }
-            }////
-            ///.......
-            ///
-            print(recipesToView)
+            }
         }else{
             recipesToView = presenter?.interactor?.recipesModel
         }

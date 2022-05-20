@@ -57,7 +57,7 @@ extension RecipesPresenter: RecipesListInteractorToPresenterProtocol {
     }
     
     func RecipesFetchedFailed() {
-        view?.showError(msg: "Problem Fetching News")
+        view?.showError(msg: "Problem Fetching Recipes")
     }
     
 }

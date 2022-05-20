@@ -16,6 +16,7 @@
 		C704236528379DA900567C3F /* RecipeDetailsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C704236328379DA900567C3F /* RecipeDetailsTableViewCell.xib */; };
 		C70423682837AF0F00567C3F /* SuggestionCellsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70423662837AF0F00567C3F /* SuggestionCellsTableViewCell.swift */; };
 		C70423692837AF0F00567C3F /* SuggestionCellsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C70423672837AF0F00567C3F /* SuggestionCellsTableViewCell.xib */; };
+		C70E01EA2837FAF700B64DDD /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70E01E92837FAF700B64DDD /* Extensions.swift */; };
 		C74B0C232836A1DD00E8211B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74B0C222836A1DD00E8211B /* AppDelegate.swift */; };
 		C74B0C2C2836A1DF00E8211B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C74B0C2B2836A1DF00E8211B /* Assets.xcassets */; };
 		C74B0C2F2836A1DF00E8211B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C74B0C2D2836A1DF00E8211B /* LaunchScreen.storyboard */; };
@@ -76,6 +77,7 @@
 		C704236328379DA900567C3F /* RecipeDetailsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecipeDetailsTableViewCell.xib; sourceTree = "<group>"; };
 		C70423662837AF0F00567C3F /* SuggestionCellsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionCellsTableViewCell.swift; sourceTree = "<group>"; };
 		C70423672837AF0F00567C3F /* SuggestionCellsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SuggestionCellsTableViewCell.xib; sourceTree = "<group>"; };
+		C70E01E92837FAF700B64DDD /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		C74B0C1F2836A1DD00E8211B /* iOSAssignment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSAssignment.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C74B0C222836A1DD00E8211B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C74B0C2B2836A1DF00E8211B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -227,6 +229,7 @@
 			children = (
 				C74B0C222836A1DD00E8211B /* AppDelegate.swift */,
 				C74B0C5F2836A47F00E8211B /* Constants.swift */,
+				C70E01E92837FAF700B64DDD /* Extensions.swift */,
 			);
 			path = SupportingFiles;
 			sourceTree = "<group>";
@@ -579,6 +582,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C70E01EA2837FAF700B64DDD /* Extensions.swift in Sources */,
 				C74B0C5D2836A2DB00E8211B /* RecipesSearchViewController.swift in Sources */,
 				C74B0C632836A98300E8211B /* RecipesProtocols.swift in Sources */,
 				C74B0C722836AD8400E8211B /* Ingredient.swift in Sources */,
