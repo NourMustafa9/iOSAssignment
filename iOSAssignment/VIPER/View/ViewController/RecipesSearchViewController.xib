@@ -11,11 +11,15 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RecipesSearchViewController" customModule="iOSAssignment" customModuleProvider="target">
             <connections>
                 <outlet property="activityIndicator" destination="Q4p-3h-B1k" id="kcp-fN-Fyy"/>
+                <outlet property="allBtn" destination="LQD-bJ-x5D" id="BMQ-TB-thC"/>
                 <outlet property="dataPicker" destination="7rW-iN-Zc2" id="nb3-Ed-VAx"/>
+                <outlet property="ketoBtn" destination="tDs-Lj-nJF" id="Fgl-KA-fjJ"/>
                 <outlet property="loadingIndicator" destination="OE7-m6-QRd" id="iej-I8-Gjh"/>
                 <outlet property="loadingView" destination="KYx-zF-mYi" id="sdK-x2-STL"/>
+                <outlet property="lowSugarBtn" destination="Kui-vH-vdo" id="dY0-gW-GKx"/>
                 <outlet property="recipeTableView" destination="JHR-hD-AjS" id="uKk-4x-Tu8"/>
                 <outlet property="searchTextFeild" destination="NeN-2j-wwd" id="ZB8-wc-j96"/>
+                <outlet property="veganBtn" destination="6Oo-0J-2Ng" id="EFR-5Y-zc2"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -25,10 +29,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ye7-4T-MwC">
-                    <rect key="frame" x="0.0" y="44" width="414" height="50"/>
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recipes Search" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JtB-VN-65q">
-                            <rect key="frame" x="148" y="15" width="118" height="20.5"/>
+                            <rect key="frame" x="148" y="30" width="118" height="20.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -37,20 +41,20 @@
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstItem="JtB-VN-65q" firstAttribute="centerX" secondItem="Ye7-4T-MwC" secondAttribute="centerX" id="SQj-OH-ygK"/>
-                        <constraint firstAttribute="height" constant="50" id="YfE-xl-Ub3"/>
+                        <constraint firstAttribute="height" constant="80" id="YfE-xl-Ub3"/>
                         <constraint firstItem="JtB-VN-65q" firstAttribute="centerY" secondItem="Ye7-4T-MwC" secondAttribute="centerY" id="oTz-ed-etD"/>
                     </constraints>
                 </view>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NeN-2j-wwd">
-                    <rect key="frame" x="10" y="94" width="306" height="34"/>
+                    <rect key="frame" x="10" y="80" width="306" height="34"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
-                <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="N6V-f4-m6g">
-                    <rect key="frame" x="0.0" y="128" width="414" height="60"/>
+                <stackView opaque="NO" contentMode="scaleAspectFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="N6V-f4-m6g">
+                    <rect key="frame" x="0.0" y="114" width="414" height="40"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LQD-bJ-x5D">
-                            <rect key="frame" x="0.0" y="0.0" width="96" height="60"/>
+                            <rect key="frame" x="0.0" y="0.0" width="103.5" height="40"/>
                             <state key="normal" title="Button"/>
                             <buttonConfiguration key="configuration" style="plain" title="All"/>
                             <connections>
@@ -58,7 +62,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kui-vH-vdo">
-                            <rect key="frame" x="106" y="0.0" width="96" height="60"/>
+                            <rect key="frame" x="103.5" y="0.0" width="103.5" height="40"/>
                             <state key="normal" title="Button"/>
                             <buttonConfiguration key="configuration" style="plain" title="Low Sugar"/>
                             <connections>
@@ -66,7 +70,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tDs-Lj-nJF">
-                            <rect key="frame" x="212" y="0.0" width="96" height="60"/>
+                            <rect key="frame" x="207" y="0.0" width="103.5" height="40"/>
                             <state key="normal" title="Button"/>
                             <buttonConfiguration key="configuration" style="plain" title="Keto"/>
                             <connections>
@@ -74,7 +78,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Oo-0J-2Ng">
-                            <rect key="frame" x="318" y="0.0" width="96" height="60"/>
+                            <rect key="frame" x="310.5" y="0.0" width="103.5" height="40"/>
                             <state key="normal" title="Button"/>
                             <buttonConfiguration key="configuration" style="plain" title="Vegan"/>
                             <connections>
@@ -83,11 +87,11 @@
                         </button>
                     </subviews>
                     <constraints>
-                        <constraint firstAttribute="height" constant="60" id="tXk-ih-eVb"/>
+                        <constraint firstAttribute="height" constant="40" id="tXk-ih-eVb"/>
                     </constraints>
                 </stackView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="200" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="JHR-hD-AjS">
-                    <rect key="frame" x="0.0" y="188" width="414" height="674"/>
+                    <rect key="frame" x="0.0" y="154" width="414" height="708"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="Lk2-Z5-b7h"/>
@@ -95,7 +99,7 @@
                     </connections>
                 </tableView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O2z-Bz-XU1">
-                    <rect key="frame" x="326" y="95.5" width="80" height="31"/>
+                    <rect key="frame" x="326" y="81.5" width="80" height="31"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="80" id="gb5-Jh-CZQ"/>
                     </constraints>
@@ -106,7 +110,7 @@
                     </connections>
                 </button>
                 <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7rW-iN-Zc2">
-                    <rect key="frame" x="10" y="128" width="306" height="100"/>
+                    <rect key="frame" x="10" y="114" width="306" height="100"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="100" id="Gv2-kr-MAu"/>
                     </constraints>
@@ -157,7 +161,7 @@
                 <constraint firstItem="O2z-Bz-XU1" firstAttribute="leading" secondItem="NeN-2j-wwd" secondAttribute="trailing" constant="10" id="d4O-t2-tEi"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="KYx-zF-mYi" secondAttribute="trailing" id="eGU-Gr-KLg"/>
                 <constraint firstItem="JHR-hD-AjS" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="tKh-sJ-aM5"/>
-                <constraint firstAttribute="top" secondItem="Ye7-4T-MwC" secondAttribute="top" constant="-44" id="tvO-pG-JKd"/>
+                <constraint firstAttribute="top" secondItem="Ye7-4T-MwC" secondAttribute="top" id="tvO-pG-JKd"/>
                 <constraint firstItem="Q4p-3h-B1k" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="u4f-Eu-3dE"/>
                 <constraint firstItem="7rW-iN-Zc2" firstAttribute="leading" secondItem="NeN-2j-wwd" secondAttribute="leading" id="w01-kb-vyA"/>
                 <constraint firstItem="Ye7-4T-MwC" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="yfI-du-Sre"/>

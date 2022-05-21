@@ -17,6 +17,13 @@ class RecipesSearchViewController: UIViewController {
     @IBOutlet weak var searchTextFeild: UITextField!
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
+    @IBOutlet weak var allBtn: UIButton!
+    @IBOutlet weak var lowSugarBtn: UIButton!
+    @IBOutlet weak var ketoBtn: UIButton!
+    @IBOutlet weak var veganBtn: UIButton!
+    
+    
     // MARK: - Properties
     var presenter: RecipesListViewToPresenterProtocol?
     var allRecipes : RecipesModel?
@@ -42,33 +49,73 @@ class RecipesSearchViewController: UIViewController {
         self.dataPicker.backgroundColor = .white
         recipeTableView.dataSource = self
         recipeTableView.delegate = self
-        //recipeTableView.tableFooterView = UIView()
-        recipeTableView.estimatedRowHeight = 200
-        recipeTableView.rowHeight = UITableView.automaticDimension
         
         recipeTableView.register(UINib(nibName: "RecipesTableViewCell", bundle: .main), forCellReuseIdentifier: "RecipesTableViewCell")
     }
     
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
     func showActivityIndicator(){
         activityIndicator.isHidden = false
         activityIndicator.startAnimating()
     }
+    
+    
+    func selectDeselectBtn(name: String){
+        switch name {
+        case "all" :
+            
+            self.allBtn.isSelected = true
+            self.lowSugarBtn.isSelected = false
+            self.ketoBtn.isSelected = false
+            self.veganBtn.isSelected = false
+   
+        case "lowSugar" :
+            
+            self.allBtn.isSelected = false
+            self.lowSugarBtn.isSelected = true
+            self.ketoBtn.isSelected = false
+            self.veganBtn.isSelected = false
+            
+        case "keto" :
+            
+            self.allBtn.isSelected = false
+            self.lowSugarBtn.isSelected = false
+            self.ketoBtn.isSelected = true
+            self.veganBtn.isSelected = false
+
+        case "vegan" :
+            
+            self.allBtn.isSelected = false
+            self.lowSugarBtn.isSelected = false
+            self.ketoBtn.isSelected = false
+            self.veganBtn.isSelected = true
+            
+            
+        default:
+            self.allBtn.isSelected = true
+            self.lowSugarBtn.isSelected = false
+            self.ketoBtn.isSelected = false
+            self.veganBtn.isSelected = false
+        }
+    }
+    
     @IBAction func lowSugarFilter(_ sender: Any) {
+        self.selectDeselectBtn(name: "lowSugar")
         scrollActivate = false
         presenter?.updateView(keyWord: "low-sugar")
         self.showActivityIndicator()
     }
     
     @IBAction func ketoFilter(_ sender: Any) {
+        self.selectDeselectBtn(name: "keto")
         scrollActivate = false
         presenter?.updateView(keyWord: "keto-friendly")
         self.showActivityIndicator()
@@ -76,17 +123,23 @@ class RecipesSearchViewController: UIViewController {
     
     
     @IBAction func veganFilter(_ sender: Any) {
+        self.selectDeselectBtn(name: "vegan")
         scrollActivate = false
         presenter?.updateView(keyWord: "vegan")
         self.showActivityIndicator()
     }
     
     @IBAction func getAllRecipes(_ sender: UIButton) {
+        self.selectDeselectBtn(name: "all")
         scrollActivate = false
         presenter?.updateView(keyWord: "all")
         self.showActivityIndicator()
     }
     @IBAction func clearAll(_ sender: UIButton) {
+        self.allBtn.isSelected = false
+        self.lowSugarBtn.isSelected = false
+        self.ketoBtn.isSelected = false
+        self.veganBtn.isSelected = false
         self.searchTextFeild.text = ""
         self.dataPicker.isHidden = true
         self.view.endEditing(true)
@@ -97,27 +150,27 @@ class RecipesSearchViewController: UIViewController {
 extension RecipesSearchViewController : UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-            return recipesToView?.hits?.count ?? 0
+        return recipesToView?.hits?.count ?? 0
         
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-            let cell = self.recipeTableView.dequeueReusableCell(withIdentifier: "RecipesTableViewCell", for: indexPath) as? RecipesTableViewCell
-            let row = indexPath.row
+        let cell = self.recipeTableView.dequeueReusableCell(withIdentifier: "RecipesTableViewCell", for: indexPath) as? RecipesTableViewCell
+        let row = indexPath.row
         
         if let rec = self.recipesToView?.hits?[row]{
             if let rec_ = rec.recipe{
                 cell?.setCell(recipe : rec_)
             }
-          
-            }
-            return cell ?? UITableViewCell()
-       
-       
+            
+        }
+        return cell ?? UITableViewCell()
+        
+        
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
+        return 170
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == self.recipeTableView{
@@ -127,14 +180,14 @@ extension RecipesSearchViewController : UITableViewDelegate, UITableViewDataSour
             }
             presenter?.openScreen(screenName: "RecipeDetailViewController", onViewController: self)
         }
-       
+        
     }
     
     
 }
 // MARK: Pagination
 extension RecipesSearchViewController: UIScrollViewDelegate{
-
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         self.view.endEditing(true)
         if (scrollView.contentOffset.y + scrollView.frame.size.height) > scrollView.contentSize.height {
@@ -149,7 +202,7 @@ extension RecipesSearchViewController: UIScrollViewDelegate{
             }
         }
     }
-   
+    
 }
 
 
@@ -162,8 +215,8 @@ extension RecipesSearchViewController : UITextFieldDelegate, UIPickerViewDelegat
         return  self.suggestionKeyWords.count
     }
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-           return suggestionKeyWords[row]
-       }
+        return suggestionKeyWords[row]
+    }
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         self.showActivityIndicator()
         self.searchTextFeild.text = suggestionKeyWords[row]
@@ -171,15 +224,15 @@ extension RecipesSearchViewController : UITextFieldDelegate, UIPickerViewDelegat
         self.dataPicker.isHidden = true
         searchTextFeild.resignFirstResponder()
     }
- 
-       
+    
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if !validateField(enteredString: textField.text ?? "")   ||  textField.text.isNullOrWhitespace{
             self.showError(msg: "Please enter valid recipe")
             self.searchTextFeild.text  = ""
             return false
         }else{
-          
+            
             scrollActivate = false
             var texToSend = self.searchTextFeild.text ?? ""
             if suggestionKeyWords.count < 10{
@@ -187,7 +240,7 @@ extension RecipesSearchViewController : UITextFieldDelegate, UIPickerViewDelegat
                 
                 if let text = textField.text, let lastChar = text.last, lastChar == " " {
                     texToSend = String(text.dropLast())
-                 
+                    
                 }
                 
                 suggestionKeyWords.append(texToSend)
@@ -198,17 +251,17 @@ extension RecipesSearchViewController : UITextFieldDelegate, UIPickerViewDelegat
             searchTextFeild.resignFirstResponder()
             return true
         }
-       
+        
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == self.searchTextFeild  && suggestionKeyWords.count > 0{
             self.dataPicker.isHidden = false
             self.dataPicker.reloadAllComponents()
-            }
         }
+    }
     //MARK:- ScrollView Delegate
-
+    
     func validateField(enteredString:String) -> Bool {
         
         let validationFormat = "[a-zA-Z\\s]+"
@@ -240,7 +293,7 @@ extension RecipesSearchViewController: RecipesListPresenterToViewProtocol {
         self.recipeTableView.reloadData()
     }
     
-
+    
     func showError(msg : String) {
         let alert = UIAlertController(title: "Alert", message: msg, preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "Okay", style: UIAlertAction.Style.default, handler: nil))

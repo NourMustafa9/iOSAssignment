@@ -78,11 +78,11 @@ extension RecipeDetailViewController : UITableViewDelegate,UITableViewDataSource
         }else if section == 1{
             return ingredientsArr.count
         }else{
-            return 0
+            return 1
         }
     }
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
@@ -91,8 +91,10 @@ extension RecipeDetailViewController : UITableViewDelegate,UITableViewDataSource
         guard let cell = self.detailsTableView.dequeueReusableCell(withIdentifier: "RecipeDetailsTableViewCell", for: indexPath) as? RecipeDetailsTableViewCell else { return UITableViewCell() }
         if indexPath.section == 0 {
             cell.setUpTitle(name: self.selectedRecipe?.recipe?.label ?? "")
-        }else{
+        }else if indexPath.section == 1 {
             cell.setUpIngredient(name: self.ingredientsArr[indexPath.row], index: indexPath.row)
+        }else{
+            cell.setUpHealth(healthString: self.selectedRecipe?.recipe?.healthLabels?.joined(separator: ", ") ?? "")
         }
         return cell
     }
