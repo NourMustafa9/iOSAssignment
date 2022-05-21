@@ -13,7 +13,7 @@ struct RecipesModel: Codable {
     let more : Bool?
     let q : String?
     let to : Int?
-    let links : Link?
+    var links : Link?
     
 
     enum CodingKeys: String, CodingKey {

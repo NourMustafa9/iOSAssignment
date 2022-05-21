@@ -10,7 +10,9 @@ import UIKit
 class RecipesSearchViewController: UIViewController {
     
     // MARK: - IBOutlet
+    @IBOutlet weak var loadingView: UIView!
     @IBOutlet weak var recipeTableView: UITableView!
+    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var dataPicker: UIPickerView!
     @IBOutlet weak var searchTextFeild: UITextField!
     
@@ -35,6 +37,8 @@ class RecipesSearchViewController: UIViewController {
     }
     
     private func setUpTableView() {
+        self.loadingView.isHidden = true
+        self.loadingIndicator.isHidden = true
         self.dataPicker.isHidden = true
         self.dataPicker.backgroundColor = .white
         recipeTableView.dataSource = self
@@ -137,6 +141,9 @@ extension RecipesSearchViewController: UIScrollViewDelegate{
             if !scrollActivate {
                 if self.recipesToView?.links?.next?.href != ""{
                     scrollActivate = true
+                    self.loadingView.isHidden = false
+                    self.loadingIndicator.isHidden = false
+                    self.loadingIndicator.startAnimating()
                     presenter?.updateView(keyWord: "pagination_\(self.recipesToView?.links?.next?.href ?? "")")
                 }
             }
@@ -172,9 +179,9 @@ extension RecipesSearchViewController : UITextFieldDelegate, UIPickerViewDelegat
             self.searchTextFeild.text  = ""
             return false
         }else{
-            self.showActivityIndicator()
+          
             scrollActivate = false
-            var texToSend = ""
+            var texToSend = self.searchTextFeild.text ?? ""
             if suggestionKeyWords.count < 10{
                 
                 
@@ -185,7 +192,7 @@ extension RecipesSearchViewController : UITextFieldDelegate, UIPickerViewDelegat
                 
                 suggestionKeyWords.append(texToSend)
             }
-            
+            self.showActivityIndicator()
             self.presenter?.updateView(keyWord:texToSend)
             self.dataPicker.isHidden = true
             searchTextFeild.resignFirstResponder()
@@ -214,18 +221,22 @@ extension RecipesSearchViewController : UITextFieldDelegate, UIPickerViewDelegat
 extension RecipesSearchViewController: RecipesListPresenterToViewProtocol {
     func showRecipes() {
         if scrollActivate {
-            recipesToView = presenter?.interactor?.recipesModel
-            if let a = presenter?.interactor?.recipesModel?.hits {
-                for i in a {
-                    recipesToView?.hits?.append(i)
-                }
-            }
+            var temp = self.recipesToView
+            temp?.hits?.append(contentsOf: presenter?.interactor?.recipesModel?.hits ?? [Hit]())
+            let newLink = presenter?.interactor?.recipesModel?.links?.next?.href
+            
+            temp?.links?.next?.href = newLink
+            recipesToView = temp
+            self.loadingView.isHidden = true
+            self.loadingIndicator.isHidden = true
+            self.loadingIndicator.startAnimating()
         }else{
             recipesToView = presenter?.interactor?.recipesModel
         }
+        scrollActivate = false
         activityIndicator.isHidden = true
         activityIndicator.stopAnimating()
-      
+        self.recipeTableView.isScrollEnabled = true
         self.recipeTableView.reloadData()
     }
     
@@ -233,6 +244,7 @@ extension RecipesSearchViewController: RecipesListPresenterToViewProtocol {
     func showError(msg : String) {
         let alert = UIAlertController(title: "Alert", message: msg, preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "Okay", style: UIAlertAction.Style.default, handler: nil))
+        
         self.present(alert, animated: true, completion: nil)
     }
 }

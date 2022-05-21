@@ -10,7 +10,7 @@ import Foundation
 
 struct Next : Codable {
 
-    let href : String?
+    var href : String?
     let title : String?
 
 

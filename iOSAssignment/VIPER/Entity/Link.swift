@@ -9,7 +9,7 @@ import Foundation
 
 struct Link : Codable {
 
-    let next : Next?
+    var next : Next?
    
 
 
