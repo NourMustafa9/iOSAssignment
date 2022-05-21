@@ -33,7 +33,6 @@ class RecipesSearchViewController: UIViewController {
         presenter?.updateView(keyWord: "all")
         setUpTableView()
         searchTextFeild.delegate = self
-  
     }
     
     private func setUpTableView() {
@@ -137,6 +136,7 @@ extension RecipesSearchViewController : UITableViewDelegate, UITableViewDataSour
 extension RecipesSearchViewController: UIScrollViewDelegate{
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        self.view.endEditing(true)
         if (scrollView.contentOffset.y + scrollView.frame.size.height) > scrollView.contentSize.height {
             if !scrollActivate {
                 if self.recipesToView?.links?.next?.href != ""{
