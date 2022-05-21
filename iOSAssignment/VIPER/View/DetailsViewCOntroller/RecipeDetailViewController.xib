@@ -65,14 +65,14 @@
                         <constraint firstAttribute="trailing" secondItem="haE-h1-c42" secondAttribute="trailing" id="tsr-hw-e3M"/>
                     </constraints>
                 </view>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zOn-S0-xNa">
-                    <rect key="frame" x="0.0" y="104" width="414" height="200"/>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zOn-S0-xNa">
+                    <rect key="frame" x="0.0" y="104" width="414" height="260"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="200" id="i7p-Xf-z5M"/>
+                        <constraint firstAttribute="height" constant="260" id="i7p-Xf-z5M"/>
                     </constraints>
                 </imageView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="MzN-hC-FaP">
-                    <rect key="frame" x="0.0" y="304" width="414" height="488"/>
+                    <rect key="frame" x="0.0" y="364" width="414" height="448"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="d02-5s-g4o"/>
@@ -80,13 +80,16 @@
                     </connections>
                 </tableView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HU5-1z-x9Q">
-                    <rect key="frame" x="107" y="792" width="200" height="60"/>
+                    <rect key="frame" x="107" y="812" width="200" height="40"/>
+                    <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="200" id="LT0-1B-xXF"/>
-                        <constraint firstAttribute="height" constant="60" id="pcc-Hh-UJI"/>
+                        <constraint firstAttribute="height" constant="40" id="pcc-Hh-UJI"/>
                     </constraints>
                     <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="plain" title="Recipe Website"/>
+                    <buttonConfiguration key="configuration" style="plain" title="Recipe Website">
+                        <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </buttonConfiguration>
                     <connections>
                         <action selector="goToRecWebsite:" destination="-1" eventType="touchUpInside" id="VMx-1g-wTZ"/>
                     </connections>
