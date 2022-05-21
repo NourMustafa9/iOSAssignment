@@ -21,7 +21,7 @@ class RecipesInteractor: RecipesListPresentorToInteractorProtocol {
     // MARK: - Methods
     func fetchAllRecipes(keyWord: String) {
         print("keyword \(keyWord)")
-        var urlStr = Constants.getAllRecipesUrl + keyWord + Constants.getAllRecipesUrl_Ids
+        var urlStr = Constants.getAllRecipesUrl + keyWord.replacingOccurrences(of: " " , with: "") + Constants.getAllRecipesUrl_Ids
         if keyWord != "" && keyWord == Constants.lowSugar || keyWord == Constants.keto || keyWord == Constants.vegan {
             urlStr = Constants.urlWithKeyWord + keyWord
         }else if keyWord.contains("pagination_") {

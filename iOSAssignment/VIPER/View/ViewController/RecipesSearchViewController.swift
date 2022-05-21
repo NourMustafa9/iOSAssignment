@@ -36,13 +36,23 @@ class RecipesSearchViewController: UIViewController {
     // MARK: - Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        activityIndicator.startAnimating()
-        presenter?.updateView(keyWord: "all")
-        setUpTableView()
-        searchTextFeild.delegate = self
+        getData()
+        setUpViews()
     }
     
-    private func setUpTableView() {
+    
+    func getData(){
+        if ReachabilityCheck.isConnectedToNetwork(){
+            activityIndicator.startAnimating()
+            presenter?.updateView(keyWord: "all")
+          
+        }else{
+            self.showError(msg: "Please check your Internet connection")
+        }
+   
+    }
+    private func setUpViews() {
+        searchTextFeild.delegate = self
         self.loadingView.isHidden = true
         self.loadingIndicator.isHidden = true
         self.dataPicker.isHidden = true
@@ -295,6 +305,7 @@ extension RecipesSearchViewController: RecipesListPresenterToViewProtocol {
     
     
     func showError(msg : String) {
+        self.activityIndicator.isHidden = true
         let alert = UIAlertController(title: "Alert", message: msg, preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "Okay", style: UIAlertAction.Style.default, handler: nil))
         
