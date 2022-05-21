@@ -108,7 +108,11 @@ class RecipesSearchViewController: UIViewController {
             self.ketoBtn.isSelected = false
             self.veganBtn.isSelected = true
             
-            
+        case "deSelectAll" :
+            self.allBtn.isSelected = false
+            self.lowSugarBtn.isSelected = false
+            self.ketoBtn.isSelected = false
+            self.veganBtn.isSelected = false
         default:
             self.allBtn.isSelected = true
             self.lowSugarBtn.isSelected = false
@@ -146,10 +150,7 @@ class RecipesSearchViewController: UIViewController {
         self.showActivityIndicator()
     }
     @IBAction func clearAll(_ sender: UIButton) {
-        self.allBtn.isSelected = false
-        self.lowSugarBtn.isSelected = false
-        self.ketoBtn.isSelected = false
-        self.veganBtn.isSelected = false
+        self.selectDeselectBtn(name: "deSelectAll")
         self.searchTextFeild.text = ""
         self.dataPicker.isHidden = true
         self.view.endEditing(true)
@@ -237,6 +238,7 @@ extension RecipesSearchViewController : UITextFieldDelegate, UIPickerViewDelegat
     
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.selectDeselectBtn(name: "deSelectAll")
         if !validateField(enteredString: textField.text ?? "")   ||  textField.text.isNullOrWhitespace{
             self.showError(msg: "Please enter valid recipe")
             self.searchTextFeild.text  = ""
